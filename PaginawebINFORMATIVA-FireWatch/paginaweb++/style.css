@@ -1,0 +1,724 @@
+
+  :root{
+    --bg: #f3f2f0;
+    --bg-2: #ffffff;
+    --surface: #fbfaf9;
+    --surface-2: #c9c5c1;
+    --line: rgba(29, 31, 31, 0.1);
+    --line-strong: rgba(29, 31, 31, 0.22); /* ---------- color de contorno "contacto"  ---------- */
+    --ash: #1d1f1f;
+    --ash-dim: #57534f;  /* ---------- color de texto  ---------- */
+    --pine: #1d1f1f;
+    --pine-light: #2c2e2e;
+    --ember: #ff4500;  /* ---------- color de texto mediano ---------- */
+    --ember-light: #ff7a45;
+    --amber: #c1440e;
+    --nav-text: #0e0d0d;
+    --nav-menu-icon: #fff5f5;
+    --nav-mobile-text: #1d1f1f;
+    --radius: 2px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--ash);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--ember); color:var(--bg); }
+
+  a{ color:inherit; text-decoration:none; }
+
+  :focus-visible{
+    outline:2px solid var(--ember-light);
+    outline-offset:3px;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:16px; height:1px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    line-height:0.98;
+    text-transform:uppercase;
+    color:var(--ash);
+  }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(193, 206, 206, 0.5);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:16px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand img{
+    height:30px;
+    width:auto;
+    display:block;
+  }
+  .nav .brand img{
+    content:url("imagen/DEFINITIVOLogo-FireWatch.png");
+  }
+  .brand span{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:1.15rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--nav-text);
+  }
+  .brand span em{
+    font-style:normal;
+    color:var(--ember);
+  }
+
+  nav.links{
+    display:flex;
+    gap:36px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  nav.links a{
+    color:var(--nav-text);
+    position:relative;
+    padding-bottom:4px;
+    transition:color 0.25s ease;
+  }
+  nav.links a:hover{ color:var(--ember-light); }
+  nav.links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--ember);
+    transition:width 0.25s ease;
+  }
+  nav.links a:hover::after{ width:100%; }
+
+  #mobileMenu a{
+    color:var(--nav-mobile-text);
+    transition:color 0.25s ease;
+  }
+  #mobileMenu a:hover{ color:var(--ember); }
+
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border:1px solid var(--line-strong);
+    padding:9px 16px;
+    color:var(--nav-text);
+    transition:border-color 0.25s ease, background 0.25s ease;
+  }
+  .nav-cta:hover{ border-color:var(--ember); background:rgba(255,69,0,0.08); }
+
+  .menu-btn{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background-color: transparent;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+
+  }
+  .menu-btn span{
+    width:22px; height:2px;
+    background:var(--nav-menu-icon);
+  }
+
+  /* ---------- HERO ---------- */
+  section.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:160px 0 100px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,69,0,0.10), transparent 65%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+    margin:20px 0 26px;
+  }
+  .hero h1 .accent{ color:var(--ember); }
+
+  .hero p.lead{
+    font-size:1.05rem;
+    color:var(--ash-dim);
+    max-width:46ch;
+    margin-bottom:36px;
+  }
+
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:15px 26px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary{
+    background:var(--ember);
+    color:#100b09;
+    border:1px solid var(--ember);
+  }
+  .btn-primary:hover{ background:var(--ember-light); border-color:var(--ember-light); transform:translateY(-2px); }
+  .btn-ghost{
+    border:1px solid var(--line-strong);
+    color:var(--ash);
+  }
+  .btn-ghost:hover{ border-color:var(--ash-dim); transform:translateY(-2px); }
+
+  .hero-image{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    aspect-ratio:4/5;
+    isolation:isolate;
+    transform:rotate(-2deg);
+    filter:drop-shadow(0 18px 24px rgba(29,31,31,0.16));
+  }
+  .hero-image::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    inset:12px -12px -12px 12px;
+    border:1px solid var(--ember);
+    border-radius:4% 22% 4% 22%;
+  }
+  .hero-image img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    border:1px solid var(--line-strong);
+    border-radius:18% 4% 18% 4%;
+  }
+  .hero-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(180deg, transparent 54%, rgba(29,31,31,0.78));
+    pointer-events:none;
+    border-radius:18% 4% 18% 4%;
+  }
+  .hero-image figcaption{
+    position:absolute;
+    z-index:2;
+    right:18px;
+    bottom:16px;
+    left:18px;
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .hero-image figcaption span{ color:var(--ember-light); }
+
+  /* --- radar / ridge visual --- */
+  .scope{
+    position:relative;
+    aspect-ratio:1/1;
+    max-width:420px;
+    margin:0 auto;
+    border:1px solid var(--line-strong);
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, rgba(44,46,46,0.55), rgba(12,12,12,0.92) 72%);
+    overflow:hidden;
+  }
+  .scope::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-radial-gradient(circle at 50% 45%, transparent 0, transparent 38px, var(--line) 39px);
+    opacity:0.5;
+  }
+  .ridge-svg{
+    position:absolute;
+    bottom:0; left:0;
+    width:100%;
+    display:block;
+  }
+  .sweep{
+    position:absolute;
+    top:0; left:50%;
+    width:50%;
+    height:100%;
+    transform-origin:0% 50%;
+    background:conic-gradient(from 0deg, rgba(242,169,59,0.30), transparent 32%);
+    animation:sweep 6s linear infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes sweep{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+  .camera-dot{
+    position:absolute;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--ember-light);
+    box-shadow:0 0 0 0 rgba(255,122,69,0.6);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,122,69,0.55); }
+    70%{ box-shadow:0 0 0 16px rgba(255,122,69,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,122,69,0); }
+  }
+  .smoke{
+    position:absolute;
+    width:60px;
+    opacity:0.55;
+  }
+  .smoke path{
+    animation:drift 5s ease-in-out infinite;
+  }
+  @keyframes drift{
+    0%,100%{ transform:translateY(0) scaleY(1); opacity:0.5; }
+    50%{ transform:translateY(-6px) scaleY(1.05); opacity:0.8; }
+  }
+  .scope-label{
+    position:absolute;
+    bottom:14px; left:0; right:0;
+    text-align:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ash-dim);
+  }
+
+  .hero-strip{
+    margin-top:90px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+    padding-top:26px;
+  }
+  .hero-strip div{
+    padding-right:24px;
+  }
+  .hero-strip .num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--ember);
+    font-size:0.78rem;
+    margin-bottom:6px;
+    display:block;
+  }
+  .hero-strip p{
+    font-size:0.9rem;
+    color:var(--ash-dim);
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    padding:120px 0;
+    position:relative;
+  }
+  section.alt{
+    background:var(--bg-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+
+  .section-head{
+    max-width:640px;
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 3.6vw, 3rem);
+    margin-top:16px;
+  }
+  .section-head p{
+    color:var(--ash-dim);
+    margin-top:18px;
+    max-width:56ch;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- QUIENES SOMOS ---------- */
+  .about-copy{
+    max-width:760px;
+    color:var(--ash-dim);
+    margin-bottom:70px;
+    font-size:1.02rem;
+  }
+  .org-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .org-card{
+    background:var(--bg);
+    padding:34px 26px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:220px;
+  }
+  .org-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:var(--ember);
+    border:1px solid rgba(255,69,0,0.35);
+    padding:4px 9px;
+    width:fit-content;
+  }
+  .org-card h3{
+    font-size:1.3rem;
+    text-transform:none;
+    font-weight:700;
+    letter-spacing:0;
+  }
+  .org-card p{
+    font-size:0.9rem;
+    color:var(--ash-dim);
+  }
+
+  .values-row{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+    border-top:1px solid var(--line);
+    padding-top:44px;
+  }
+  .values-row h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:10px;
+  }
+  .values-row p{
+    color:var(--ash-dim);
+    font-size:0.92rem;
+  }
+
+  /* ---------- PROYECTO ---------- */
+  .product-top{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+    margin-bottom:90px;
+  }
+  .product-copy p{
+    color:var(--ash-dim);
+    margin-bottom:20px;
+    max-width:52ch;
+  }
+  .spec-panel{
+    border:1px solid var(--line-strong);
+    background:var(--surface);
+    padding:0;
+  }
+  .spec-panel-head{
+    padding:16px 22px;
+    border-bottom:1px solid var(--line-strong);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    justify-content:space-between;
+  }
+  .spec-row{
+    display:flex;
+    justify-content:space-between;
+    padding:16px 22px;
+    border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.86rem;
+  }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-row span:first-child{ color:var(--ash-dim); }
+  .spec-row span:last-child{ color:var(--ash); }
+
+  .flow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:90px;
+  }
+  .flow-step{
+    background:var(--bg);
+    padding:32px 26px;
+    position:relative;
+  }
+  .flow-step .idx{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--ember);
+    font-size:0.78rem;
+    display:block;
+    margin-bottom:18px;
+  }
+  .flow-step h3{
+    font-size:1.25rem;
+    text-transform:none;
+    letter-spacing:0;
+    margin-bottom:10px;
+  }
+  .flow-step p{
+    font-size:0.88rem;
+    color:var(--ash-dim);
+  }
+  .flow-step:not(:last-child)::after{
+    content:"→";
+    position:absolute;
+    top:32px; right:-14px;
+    color:var(--ash-dim);
+    font-size:0.9rem;
+    z-index:2;
+  }
+
+  .service-block{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:60px;
+    align-items:center;
+    border-top:1px solid var(--line);
+    padding-top:70px;
+  }
+  .service-block .eyebrow{ margin-bottom:16px; }
+  .service-list{
+    list-style:none;
+  }
+  .service-list li{
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:16px;
+    font-size:0.95rem;
+    color:var(--ash-dim);
+  }
+  .service-list li:first-child{ border-top:1px solid var(--line); }
+  .service-list li strong{
+    color:var(--ash);
+    font-weight:600;
+    min-width:180px;
+    flex-shrink:0;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:70px;
+  }
+  .contact-info .eyebrow{ margin-bottom:18px; }
+  .contact-info h2{
+    font-size:clamp(2rem,3.6vw,2.8rem);
+    margin-bottom:22px;
+  }
+  .contact-info p{
+    color:var(--ash-dim);
+    max-width:44ch;
+    margin-bottom:36px;
+  }
+  .contact-detail{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.88rem;
+  }
+  .contact-detail a{
+    color:var(--ash);
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:2px;
+    transition:border-color 0.25s ease, color 0.25s ease;
+  }
+  .contact-detail a:hover{ color:var(--ember-light); border-color:var(--ember-light); }
+  .contact-detail .k{
+    color:var(--ash-dim);
+    display:block;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+
+  form.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .field label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ash-dim);
+  }
+  .field input, .field textarea{
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    color:var(--ash);
+    padding:14px 16px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    resize:vertical;
+    transition:border-color 0.25s ease;
+  }
+  .field input:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--ember);
+  }
+  .field textarea{ min-height:120px; }
+
+  .submit-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-top:6px;
+  }
+  .submit-note{
+    font-size:0.8rem;
+    color:var(--ash-dim);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:18px;
+  }
+  .footer-inner .brand img{
+    height:22px;
+    content:url("imagen/Nombre-Diseño-DEFINITIVOLogo-FireWatch.png");
+  }
+  .footer-inner .brand span{ font-size:0.95rem; }
+  footer p{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    color:var(--ash-dim);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    nav.links, .nav-cta{ display:none; }
+    .menu-btn{ display:flex; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-image{ max-width:340px; margin-top:40px; }
+    .hero-strip{ grid-template-columns:1fr; gap:20px; }
+    .org-grid{ grid-template-columns:1fr 1fr; }
+    .product-top, .service-block, .contact-grid{ grid-template-columns:1fr; }
+    .flow{ grid-template-columns:1fr; }
+    .flow-step::after{ display:none; }
+    .values-row{ grid-template-columns:1fr; }
+    section{ padding:80px 0; }
+  }
+  @media (max-width: 560px){
+    .org-grid{ grid-template-columns:1fr; }
+    .container{ padding:0 20px; }
+    .service-list li{ flex-direction:column; gap:4px; }
+    .service-list li strong{ min-width:0; }
+  }
